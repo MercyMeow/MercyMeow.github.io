@@ -1,7 +1,76 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<style>
+			.gif-container {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+				gap: 1rem;
+				padding: 1rem;
+			}
+			.gif-item {
+				cursor: pointer;
+				transition: transform 0.2s;
+			}
+			.gif-item:hover {
+				transform: scale(1.05);
+			}
+			.toast {
+				position: fixed;
+				bottom: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+				background: #333;
+				color: white;
+				padding: 10px 20px;
+				border-radius: 5px;
+				display: none;
+				.gif-item img {
+					max-width: 100%;
+					height: auto;
+				}
+			}
+		</style>
+	</head>
 	<body>
-		<h1>Hello World</h1>
-		<p>I'm hosted with GitHub Pages.</p>
+		<div
+			class="gif-container"
+			id="gifContainer"
+		></div>
+		<div
+			class="toast"
+			id="toast"
+		>
+			Link copied to clipboard!
+		</div>
+
+		<script>
+			const gifs = ['rule1.gif', 'rule2.gif', 'rule3.gif', 'rule4.gif', 'rule5.gif', 'rule6.gif', 'rule7.gif', 'rule8.gif', 'rule9.gif', 'rule10.gif', 'rule11.gif', 'rule12.gif', 'rule15.gif'];
+
+			const container = document.getElementById('gifContainer');
+			const toast = document.getElementById('toast');
+
+			gifs.forEach((gif) => {
+				const item = document.createElement('div');
+				item.className = 'gif-item';
+				const img = document.createElement('img');
+				img.src = `/${gif}`;
+				img.alt = gif;
+				item.appendChild(img);
+
+				item.addEventListener('click', () => {
+					const gifName = gif.replace('.gif', '');
+					const url = `${window.location.origin}/${gifName}`;
+					navigator.clipboard.writeText(url).then(() => {
+						toast.style.display = 'block';
+						setTimeout(() => {
+							toast.style.display = 'none';
+						}, 2000);
+					});
+				});
+
+				container.appendChild(item);
+			});
+		</script>
 	</body>
 </html>
