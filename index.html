@@ -113,7 +113,7 @@
 				item.appendChild(img);
 
 				item.addEventListener('click', () => {
-					const url = `${window.location.origin}/${gif}`; // Changed this line
+					const url = `${window.location.origin}/${gif}`;
 					navigator.clipboard.writeText(url).then(() => {
 						toast.style.display = 'block';
 						setTimeout(() => {
