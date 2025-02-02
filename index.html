@@ -4,13 +4,24 @@
 		<style>
 			.gif-container {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-				gap: 1rem;
-				padding: 1rem;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 20px;
+				padding: 20px;
+				max-width: 1200px;
+				margin: 0 auto;
 			}
 			.gif-item {
 				cursor: pointer;
 				transition: transform 0.2s;
+				aspect-ratio: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.gif-item img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
 			}
 			.gif-item:hover {
 				transform: scale(1.05);
@@ -25,10 +36,6 @@
 				padding: 10px 20px;
 				border-radius: 5px;
 				display: none;
-				.gif-item img {
-					max-width: 100%;
-					height: auto;
-				}
 			}
 		</style>
 	</head>
