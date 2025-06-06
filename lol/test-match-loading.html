@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Match Loading - LoL Application</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap" rel="stylesheet" />
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/utilities.css" />
+    <link rel="stylesheet" href="../css/accessibility.css" />
+    <link rel="stylesheet" href="../css/performance.css" />
+    <!-- LoL Application Specific Styles -->
+    <link rel="stylesheet" href="css/lol-styles.css" />
+    <link rel="stylesheet" href="css/lol-components.css" />
+
+    <!-- Chart.js for data visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+
+    <style>
+        .test-container { 
+            background: rgba(255, 255, 255, 0.1); 
+            border: 2px solid #c7a45d; 
+            border-radius: 10px; 
+            padding: 20px; 
+            margin: 20px 0; 
+        }
+        .test-button { 
+            background: #c7a45d; 
+            color: #1a1c4b; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .test-button:hover { background: #d4b76a; transform: translateY(-2px); }
+        .status { padding: 15px; margin: 10px 0; border-radius: 8px; font-weight: bold; }
+        .success { background: rgba(46, 204, 113, 0.2); border: 2px solid #2ecc71; color: #2ecc71; }
+        .error { background: rgba(231, 76, 60, 0.2); border: 2px solid #e74c3c; color: #e74c3c; }
+        .info { background: rgba(52, 152, 219, 0.2); border: 2px solid #3498db; color: #3498db; }
+        .warning { background: rgba(255, 193, 7, 0.2); border: 2px solid #ffc107; color: #ffc107; }
+        .screen-test { min-height: 200px; border: 2px dashed #c7a45d; border-radius: 8px; padding: 20px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="hero-section">
+            <h1 class="hero-title">🧪 Match Loading Test</h1>
+            <p class="hero-subtitle">Direct testing of match data loading functionality</p>
+        </div>
+
+        <div class="main-content">
+            <div class="test-container">
+                <h2>🎯 Direct Match Loading Test</h2>
+                <p>This page tests the match loading functionality directly without routing.</p>
+                
+                <div class="test-actions">
+                    <button class="test-button" onclick="testDirectMatchLoad()">🎮 Test Direct Match Load</button>
+                    <button class="test-button" onclick="testScreenVisibility()">👁️ Test Screen Visibility</button>
+                    <button class="test-button" onclick="testComponentImports()">📦 Test Component Imports</button>
+                    <button class="test-button" onclick="navigateToActualMatch()">🚀 Navigate to Actual Match</button>
+                </div>
+                
+                <div id="test-results"></div>
+            </div>
+
+            <!-- Test Screens (mimicking the main app structure) -->
+            <div class="test-container">
+                <h2>📺 Screen Visibility Test</h2>
+                
+                <div id="test-home-screen" class="screen-test">
+                    <h3>🏠 Home Screen</h3>
+                    <p>This is the home screen test area.</p>
+                </div>
+                
+                <div id="test-loading-screen" class="screen-test hidden">
+                    <h3>⏳ Loading Screen</h3>
+                    <p>This is the loading screen test area.</p>
+                </div>
+                
+                <div id="test-match-screen" class="screen-test hidden">
+                    <h3>🎮 Match Screen</h3>
+                    <p>This is where match content should appear.</p>
+                    <div id="test-match-content"></div>
+                </div>
+            </div>
+
+            <div class="test-container">
+                <h2>📊 Component Test Results</h2>
+                <div id="component-test-results"></div>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>Match Loading Test - League of Legends Application</p>
+                <div class="footer-links">
+                    <a href="/lol/">← Back to LoL App</a>
+                    <a href="/lol/debug-match.html">← Debug Page</a>
+                    <a href="/">← Back to Main Site</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module">
+        let testResults = document.getElementById('test-results');
+        let componentResults = document.getElementById('component-test-results');
+
+        function addResult(container, type, message) {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = `${new Date().toLocaleTimeString()} - ${message}`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Test direct match loading
+        window.testDirectMatchLoad = async function() {
+            addResult(testResults, 'info', '🧪 Starting direct match load test...');
+            
+            try {
+                // Import the App class
+                const { default: App } = await import('./js/app.js');
+                addResult(testResults, 'success', '✅ App class imported successfully');
+                
+                // Create a test app instance
+                const testApp = new App();
+                addResult(testResults, 'success', '✅ App instance created');
+                
+                // Test demo data generation
+                const demoMatchData = testApp.getDemoMatchData();
+                const demoTimelineData = testApp.getDemoTimelineData();
+                addResult(testResults, 'success', `✅ Demo data generated: ${demoMatchData.info.participants.length} participants`);
+                
+                // Test match loading with demo data
+                const testMatchContainer = document.getElementById('test-match-content');
+                if (testMatchContainer) {
+                    addResult(testResults, 'info', '🎨 Testing match view rendering...');
+                    
+                    await testApp.renderMatchView(testMatchContainer, {
+                        matchData: demoMatchData,
+                        timelineData: demoTimelineData,
+                        region: 'EUW1',
+                        matchId: '7417459564'
+                    });
+                    
+                    addResult(testResults, 'success', '✅ Match view rendered successfully!');
+                    
+                    // Show the test match screen
+                    document.getElementById('test-home-screen').classList.add('hidden');
+                    document.getElementById('test-match-screen').classList.remove('hidden');
+                    
+                } else {
+                    addResult(testResults, 'error', '❌ Test match container not found');
+                }
+                
+            } catch (error) {
+                addResult(testResults, 'error', `❌ Error: ${error.message}`);
+                console.error('Test error:', error);
+            }
+        };
+
+        // Test screen visibility
+        window.testScreenVisibility = function() {
+            addResult(testResults, 'info', '👁️ Testing screen visibility...');
+            
+            const screens = ['test-home-screen', 'test-loading-screen', 'test-match-screen'];
+            screens.forEach(screenId => {
+                const screen = document.getElementById(screenId);
+                if (screen) {
+                    const isHidden = screen.classList.contains('hidden');
+                    const display = window.getComputedStyle(screen).display;
+                    addResult(testResults, 'info', `📺 ${screenId}: hidden=${isHidden}, display=${display}`);
+                } else {
+                    addResult(testResults, 'error', `❌ Screen ${screenId} not found`);
+                }
+            });
+            
+            addResult(testResults, 'success', '✅ Screen visibility test complete');
+        };
+
+        // Test component imports
+        window.testComponentImports = async function() {
+            addResult(componentResults, 'info', '📦 Testing component imports...');
+            
+            const components = [
+                { name: 'MatchHeader', path: './js/components/MatchHeader.js' },
+                { name: 'TabContainer', path: './js/components/TabContainer.js' },
+                { name: 'OverviewTab', path: './js/components/tabs/OverviewTab.js' },
+                { name: 'TimelineTab', path: './js/components/tabs/TimelineTab.js' },
+                { name: 'BuildsTab', path: './js/components/tabs/BuildsTab.js' },
+                { name: 'AdvancedTab', path: './js/components/tabs/AdvancedTab.js' }
+            ];
+            
+            for (const component of components) {
+                try {
+                    const module = await import(component.path);
+                    if (module[component.name]) {
+                        addResult(componentResults, 'success', `✅ ${component.name} imported successfully`);
+                    } else {
+                        addResult(componentResults, 'warning', `⚠️ ${component.name} imported but class not found`);
+                    }
+                } catch (error) {
+                    addResult(componentResults, 'error', `❌ ${component.name} failed: ${error.message}`);
+                }
+            }
+            
+            addResult(componentResults, 'success', '✅ Component import test complete');
+        };
+
+        // Navigate to actual match
+        window.navigateToActualMatch = function() {
+            addResult(testResults, 'info', '🚀 Navigating to actual match page...');
+            setTimeout(() => {
+                window.location.href = '/lol/match/EUW1_7417459564';
+            }, 1000);
+        };
+
+        // Auto-run basic tests on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                addResult(testResults, 'info', '🎬 Page loaded, ready for testing');
+                testScreenVisibility();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

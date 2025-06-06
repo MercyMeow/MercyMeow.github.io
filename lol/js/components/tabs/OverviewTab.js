@@ -1,12 +1,15 @@
 // Overview Tab Component - Displays match overview with scoreboard and key statistics
 import { DataFormatter, ColorUtils } from '../../utils.js';
+import { ChartManager } from '../ChartManager.js';
 
 export class OverviewTab {
 	constructor(container, matchData, timelineData = null) {
 		this.container = container;
 		this.matchData = matchData;
 		this.timelineData = timelineData;
+		this.chartManager = new ChartManager();
 		this.render();
+		this.initializeCharts();
 	}
 
 	render() {
@@ -37,6 +40,20 @@ export class OverviewTab {
                     <h3>Match Progression</h3>
                     <div class="timeline-summary">
                         ${this.renderTimelineSummary()}
+                    </div>
+                </div>
+
+                <div class="interactive-charts">
+                    <h3>Interactive Charts</h3>
+                    <div class="charts-grid">
+                        <div class="chart-container">
+                            <h4>Gold Progression</h4>
+                            <div id="gold-progression-chart" class="chart-wrapper"></div>
+                        </div>
+                        <div class="chart-container">
+                            <h4>Damage Distribution</h4>
+                            <div id="damage-distribution-chart" class="chart-wrapper"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -340,10 +357,30 @@ export class OverviewTab {
 		return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik0xMCAxMEwzMCAzME0zMCAxMEwxMCAzMCIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+';
 	}
 
+	// Initialize interactive charts
+	initializeCharts() {
+		// Wait for DOM to be ready
+		setTimeout(() => {
+			const goldChart = this.container.querySelector('#gold-progression-chart');
+			const damageChart = this.container.querySelector('#damage-distribution-chart');
+
+			if (goldChart && this.timelineData) {
+				this.chartManager.createGoldProgressionChart(goldChart, this.timelineData);
+			} else if (goldChart) {
+				goldChart.innerHTML = '<p class="no-data">Timeline data required for gold progression chart</p>';
+			}
+
+			if (damageChart && this.matchData) {
+				this.chartManager.createDamageDistributionChart(damageChart, this.matchData);
+			}
+		}, 100);
+	}
+
 	// Update data and re-render
 	updateData(matchData, timelineData = null) {
 		this.matchData = matchData;
 		this.timelineData = timelineData;
 		this.render();
+		this.initializeCharts();
 	}
 }

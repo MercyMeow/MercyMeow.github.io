@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Analysis Test - LoL Application</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap" rel="stylesheet" />
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/utilities.css" />
+    <link rel="stylesheet" href="../css/accessibility.css" />
+    <link rel="stylesheet" href="../css/performance.css" />
+    <!-- LoL Application Specific Styles -->
+    <link rel="stylesheet" href="css/lol-styles.css" />
+    <link rel="stylesheet" href="css/lol-components.css" />
+
+    <!-- Chart.js for data visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+
+    <style>
+        .test-section { 
+            background: rgba(255, 255, 255, 0.1); 
+            border: 2px solid #c7a45d; 
+            border-radius: 10px; 
+            padding: 20px; 
+            margin: 20px 0; 
+        }
+        .test-result { 
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 4px; 
+        }
+        .success { background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; }
+        .error { background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; }
+        .info { background: rgba(52, 152, 219, 0.2); border: 1px solid #3498db; }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { padding: 8px 0; border-bottom: 1px solid rgba(199, 164, 93, 0.2); }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-status { float: right; font-weight: bold; }
+        .demo-links { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0; }
+        .demo-link { 
+            background: #c7a45d; 
+            color: #1a1c4b; 
+            padding: 10px 20px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .demo-link:hover { background: #d4b76a; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="hero-section">
+            <h1 class="hero-title">🔍 Match Analysis Test</h1>
+            <p class="hero-subtitle">Comprehensive testing of League of Legends match analysis features</p>
+        </div>
+
+        <div class="main-content">
+            <div class="test-section">
+                <h2>📋 Feature Checklist</h2>
+                <ul class="feature-list">
+                    <li>Match Header Information <span class="feature-status success">✅ Implemented</span></li>
+                    <li>Team Overview with Player Cards <span class="feature-status success">✅ Implemented</span></li>
+                    <li>Tabbed Interface (4 tabs) <span class="feature-status success">✅ Implemented</span></li>
+                    <li>Overview Tab with Charts <span class="feature-status success">✅ Enhanced</span></li>
+                    <li>Timeline Tab with Events <span class="feature-status success">✅ Enhanced</span></li>
+                    <li>Builds Tab with Items <span class="feature-status success">✅ Implemented</span></li>
+                    <li>Advanced Tab with Statistics <span class="feature-status success">✅ Implemented</span></li>
+                    <li>Interactive Chart.js Visualizations <span class="feature-status success">✅ Implemented</span></li>
+                    <li>Error Handling & Loading States <span class="feature-status success">✅ Implemented</span></li>
+                    <li>League of Legends Theme <span class="feature-status success">✅ Implemented</span></li>
+                    <li>Mobile Responsive Design <span class="feature-status success">✅ Implemented</span></li>
+                    <li>API Key Management <span class="feature-status success">✅ Implemented</span></li>
+                </ul>
+            </div>
+
+            <div class="test-section">
+                <h2>🎮 Demo Match Links</h2>
+                <p>Test the match analysis functionality with these demo links:</p>
+                <div class="demo-links">
+                    <a href="/lol/EUW17417459564" class="demo-link">Legacy Format</a>
+                    <a href="/lol/match/EUW1_7417459564" class="demo-link">New Format</a>
+                    <a href="/match/EUW1_7417459564" class="demo-link">Redirect Test</a>
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h2>📊 Expected Match Analysis Features</h2>
+                
+                <h3>1. Match Header Information</h3>
+                <div class="test-result info">
+                    <strong>Should Display:</strong> Match ID, game mode, duration, patch version, team scores, victory/defeat status
+                </div>
+
+                <h3>2. Team Overview</h3>
+                <div class="test-result info">
+                    <strong>Should Display:</strong> Both teams side by side, player names, champion icons, KDA ratios, final items, CS scores
+                </div>
+
+                <h3>3. Overview Tab</h3>
+                <div class="test-result info">
+                    <strong>Should Display:</strong> Match summary, scoreboard, key statistics comparison, interactive gold progression chart, damage distribution chart
+                </div>
+
+                <h3>4. Timeline Tab</h3>
+                <div class="test-result info">
+                    <strong>Should Display:</strong> Chronological events with icons, first blood, objectives (dragons, baron), tower destructions, team fights, timestamps
+                </div>
+
+                <h3>5. Builds Tab</h3>
+                <div class="test-result info">
+                    <strong>Should Display:</strong> Final item builds for each player, summoner spells, total gold earned, item progression
+                </div>
+
+                <h3>6. Advanced Tab</h3>
+                <div class="test-result info">
+                    <strong>Should Display:</strong> Damage analysis, vision control stats, performance metrics (KP%, DMG/Gold, CS/Min), detailed statistics
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h2>🎨 Visual Design Requirements</h2>
+                <div class="test-result success">
+                    <strong>✅ League of Legends Theme:</strong> Purple/gold color scheme (#1a1c4b, #2a1758, #c7a45d)
+                </div>
+                <div class="test-result success">
+                    <strong>✅ Typography:</strong> Philosopher font family for League of Legends feel
+                </div>
+                <div class="test-result success">
+                    <strong>✅ Responsive Design:</strong> Works on desktop, tablet, and mobile devices
+                </div>
+                <div class="test-result success">
+                    <strong>✅ Interactive Elements:</strong> Hover effects, smooth transitions, Chart.js visualizations
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h2>⚙️ Technical Implementation</h2>
+                <div class="test-result success">
+                    <strong>✅ API Integration:</strong> Riot Games API with configured API key system
+                </div>
+                <div class="test-result success">
+                    <strong>✅ Error Handling:</strong> Graceful error messages for API failures and invalid keys
+                </div>
+                <div class="test-result success">
+                    <strong>✅ Loading States:</strong> Loading indicators while fetching data
+                </div>
+                <div class="test-result success">
+                    <strong>✅ Caching:</strong> Intelligent caching for performance optimization
+                </div>
+                <div class="test-result success">
+                    <strong>✅ Routing:</strong> Client-side routing with multiple URL formats supported
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h2>🧪 Testing Instructions</h2>
+                <ol>
+                    <li><strong>Click a demo match link above</strong> - Should navigate to match analysis page</li>
+                    <li><strong>Verify Match Header</strong> - Check that match information is displayed correctly</li>
+                    <li><strong>Test All Tabs</strong> - Click through Overview, Timeline, Builds, and Advanced tabs</li>
+                    <li><strong>Check Interactive Charts</strong> - Verify Chart.js visualizations in Overview tab</li>
+                    <li><strong>Test Responsive Design</strong> - Resize browser window or test on mobile</li>
+                    <li><strong>Verify Error Handling</strong> - Try invalid match IDs to test error states</li>
+                    <li><strong>Check Loading States</strong> - Observe loading indicators during data fetch</li>
+                </ol>
+            </div>
+
+            <div class="test-section">
+                <h2>📈 Chart.js Integration</h2>
+                <div id="chart-test-container" class="chart-wrapper">
+                    <canvas id="test-chart" style="max-height: 300px;"></canvas>
+                </div>
+                <button onclick="testChartJs()" style="background: #c7a45d; color: #1a1c4b; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 1rem;">Test Chart.js</button>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>Match Analysis Test Page - League of Legends Application</p>
+                <div class="footer-links">
+                    <a href="/lol/">← Back to LoL App</a>
+                    <a href="/">← Back to Main Site</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function testChartJs() {
+            const canvas = document.getElementById('test-chart');
+            const ctx = canvas.getContext('2d');
+            
+            if (typeof Chart !== 'undefined') {
+                // Destroy existing chart if any
+                if (window.testChart) {
+                    window.testChart.destroy();
+                }
+                
+                // Create test chart
+                window.testChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0:00', '5:00', '10:00', '15:00', '20:00', '25:00'],
+                        datasets: [{
+                            label: 'Blue Team Gold',
+                            data: [0, 5000, 12000, 18000, 25000, 32000],
+                            borderColor: '#3498db',
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            borderWidth: 3,
+                            fill: true
+                        }, {
+                            label: 'Red Team Gold',
+                            data: [0, 4500, 11000, 16500, 23000, 28000],
+                            borderColor: '#e74c3c',
+                            backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                            borderWidth: 3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Gold Progression Test Chart',
+                                color: '#c7a45d',
+                                font: { family: 'Philosopher', size: 16, weight: 'bold' }
+                            },
+                            legend: {
+                                labels: {
+                                    color: 'rgba(255, 255, 255, 0.9)',
+                                    font: { family: 'Philosopher', size: 12 }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+                                grid: { color: 'rgba(199, 164, 93, 0.2)' }
+                            },
+                            y: {
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+                                grid: { color: 'rgba(199, 164, 93, 0.2)' }
+                            }
+                        }
+                    }
+                });
+                
+                console.log('✅ Chart.js test successful!');
+                alert('✅ Chart.js is working correctly!');
+            } else {
+                console.error('❌ Chart.js not loaded');
+                alert('❌ Chart.js is not loaded');
+            }
+        }
+
+        // Auto-test Chart.js on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                if (typeof Chart !== 'undefined') {
+                    console.log('✅ Chart.js loaded successfully');
+                    testChartJs();
+                } else {
+                    console.error('❌ Chart.js failed to load');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

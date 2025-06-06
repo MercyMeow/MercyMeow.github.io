@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Match Loading - LoL Application</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap" rel="stylesheet" />
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/utilities.css" />
+    <link rel="stylesheet" href="../css/accessibility.css" />
+    <link rel="stylesheet" href="../css/performance.css" />
+    <!-- LoL Application Specific Styles -->
+    <link rel="stylesheet" href="css/lol-styles.css" />
+    <link rel="stylesheet" href="css/lol-components.css" />
+
+    <!-- Chart.js for data visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+
+    <style>
+        .debug-section { 
+            background: rgba(255, 255, 255, 0.1); 
+            border: 2px solid #c7a45d; 
+            border-radius: 10px; 
+            padding: 20px; 
+            margin: 20px 0; 
+        }
+        .debug-log { 
+            background: rgba(0, 0, 0, 0.5); 
+            border: 1px solid #c7a45d; 
+            border-radius: 5px; 
+            padding: 15px; 
+            font-family: monospace; 
+            font-size: 0.9rem; 
+            max-height: 300px; 
+            overflow-y: auto; 
+            white-space: pre-wrap;
+        }
+        .test-button { 
+            background: #c7a45d; 
+            color: #1a1c4b; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 5px;
+            font-weight: bold;
+        }
+        .test-button:hover { background: #d4b76a; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; }
+        .error { background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; }
+        .info { background: rgba(52, 152, 219, 0.2); border: 1px solid #3498db; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="hero-section">
+            <h1 class="hero-title">🐛 Debug Match Loading</h1>
+            <p class="hero-subtitle">Debugging match data loading functionality</p>
+        </div>
+
+        <div class="main-content">
+            <div class="debug-section">
+                <h2>🔍 Current URL Analysis</h2>
+                <div id="url-analysis" class="status info">
+                    <strong>Current URL:</strong> <span id="current-url"></span><br>
+                    <strong>Pathname:</strong> <span id="current-pathname"></span><br>
+                    <strong>Expected Route Type:</strong> <span id="expected-route"></span>
+                </div>
+            </div>
+
+            <div class="debug-section">
+                <h2>🧪 Test Match Routes</h2>
+                <button class="test-button" onclick="testRoute('/lol/')">Test Home Route</button>
+                <button class="test-button" onclick="testRoute('/lol/EUW17417459564')">Test Legacy Format</button>
+                <button class="test-button" onclick="testRoute('/lol/match/EUW1_7417459564')">Test New Format</button>
+                <button class="test-button" onclick="testRoute('/lol/match/EUW1-7417459564')">Test Dash Format</button>
+                <button class="test-button" onclick="navigateToMatch('/lol/match/EUW1_7417459564')">Navigate to Demo Match</button>
+                <div id="route-test-results"></div>
+            </div>
+
+            <div class="debug-section">
+                <h2>📊 Router Analysis</h2>
+                <button class="test-button" onclick="analyzeRouter()">Analyze Router</button>
+                <div id="router-analysis"></div>
+            </div>
+
+            <div class="debug-section">
+                <h2>🎮 Manual Match Load Test</h2>
+                <button class="test-button" onclick="testMatchLoad()">Test loadMatch() Function</button>
+                <div id="match-load-results"></div>
+            </div>
+
+            <div class="debug-section">
+                <h2>📺 Screen Visibility Test</h2>
+                <button class="test-button" onclick="testScreens()">Test Screen Visibility</button>
+                <div id="screen-test-results"></div>
+            </div>
+
+            <div class="debug-section">
+                <h2>📝 Console Log</h2>
+                <div id="console-log" class="debug-log">Console output will appear here...</div>
+                <button class="test-button" onclick="clearLog()">Clear Log</button>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>Debug Match Loading - League of Legends Application</p>
+                <div class="footer-links">
+                    <a href="/lol/">← Back to LoL App</a>
+                    <a href="/">← Back to Main Site</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { Router } from './js/router.js';
+        
+        let debugRouter;
+        let logContainer;
+
+        // Initialize debug tools
+        window.addEventListener('DOMContentLoaded', function() {
+            debugRouter = new Router('/lol');
+            logContainer = document.getElementById('console-log');
+            
+            // Override console.log to capture output
+            const originalLog = console.log;
+            const originalError = console.error;
+            
+            console.log = function(...args) {
+                originalLog.apply(console, args);
+                appendToLog('LOG: ' + args.join(' '));
+            };
+            
+            console.error = function(...args) {
+                originalError.apply(console, args);
+                appendToLog('ERROR: ' + args.join(' '));
+            };
+            
+            updateUrlAnalysis();
+        });
+
+        function appendToLog(message) {
+            if (logContainer) {
+                logContainer.textContent += new Date().toLocaleTimeString() + ' - ' + message + '\n';
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+        }
+
+        function clearLog() {
+            if (logContainer) {
+                logContainer.textContent = 'Console cleared...\n';
+            }
+        }
+
+        function updateUrlAnalysis() {
+            document.getElementById('current-url').textContent = window.location.href;
+            document.getElementById('current-pathname').textContent = window.location.pathname;
+            
+            if (debugRouter) {
+                const params = debugRouter.extractParams(window.location.pathname);
+                document.getElementById('expected-route').textContent = params.type + ' (' + JSON.stringify(params) + ')';
+            }
+        }
+
+        window.testRoute = function(path) {
+            const results = document.getElementById('route-test-results');
+            
+            if (!debugRouter) {
+                results.innerHTML = '<div class="status error">Router not initialized</div>';
+                return;
+            }
+            
+            const params = debugRouter.extractParams(path);
+            const validation = debugRouter.validateRoute(params);
+            
+            results.innerHTML = `
+                <div class="status info">
+                    <strong>Testing route:</strong> ${path}<br>
+                    <strong>Extracted params:</strong> ${JSON.stringify(params, null, 2)}<br>
+                    <strong>Validation:</strong> ${JSON.stringify(validation, null, 2)}
+                </div>
+            `;
+        };
+
+        window.navigateToMatch = function(path) {
+            console.log('🚀 Navigating to:', path);
+            window.location.href = path;
+        };
+
+        window.analyzeRouter = function() {
+            const results = document.getElementById('router-analysis');
+            
+            if (!debugRouter) {
+                results.innerHTML = '<div class="status error">Router not initialized</div>';
+                return;
+            }
+            
+            const currentRoute = debugRouter.getCurrentRoute();
+            
+            results.innerHTML = `
+                <div class="status info">
+                    <strong>Router Base Path:</strong> ${debugRouter.basePath}<br>
+                    <strong>Current Route:</strong> ${JSON.stringify(currentRoute, null, 2)}<br>
+                    <strong>Router Methods Available:</strong> ${Object.getOwnPropertyNames(debugRouter).join(', ')}
+                </div>
+            `;
+        };
+
+        window.testMatchLoad = async function() {
+            const results = document.getElementById('match-load-results');
+            results.innerHTML = '<div class="status info">Testing match load function...</div>';
+            
+            try {
+                // Try to access the app instance
+                console.log('🧪 Testing manual match load...');
+                
+                // Check if screens exist
+                const screens = ['home-screen', 'loading-screen', 'error-screen', 'match-screen'];
+                const screenStatus = screens.map(id => {
+                    const element = document.getElementById(id);
+                    return `${id}: ${element ? 'EXISTS' : 'MISSING'}`;
+                }).join('<br>');
+                
+                results.innerHTML = `
+                    <div class="status info">
+                        <strong>Screen Elements:</strong><br>
+                        ${screenStatus}
+                    </div>
+                `;
+                
+            } catch (error) {
+                results.innerHTML = `<div class="status error">Error: ${error.message}</div>`;
+            }
+        };
+
+        window.testScreens = function() {
+            const results = document.getElementById('screen-test-results');
+            const screens = ['home-screen', 'loading-screen', 'error-screen', 'match-screen'];
+            
+            let screenInfo = screens.map(screenId => {
+                const screen = document.getElementById(screenId);
+                if (screen) {
+                    const isHidden = screen.classList.contains('hidden');
+                    const display = window.getComputedStyle(screen).display;
+                    return `${screenId}: EXISTS, hidden=${isHidden}, display=${display}`;
+                } else {
+                    return `${screenId}: MISSING`;
+                }
+            }).join('<br>');
+            
+            results.innerHTML = `
+                <div class="status info">
+                    <strong>Screen Status:</strong><br>
+                    ${screenInfo}
+                </div>
+            `;
+        };
+
+        // Update URL analysis when page loads
+        updateUrlAnalysis();
+    </script>
+</body>
+</html>
