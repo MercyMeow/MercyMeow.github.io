@@ -87,7 +87,7 @@ class App {
 				this.showLoading();
 				// Simulate loading delay
 				await new Promise((resolve) => setTimeout(resolve, 1000));
-				await this.showMatch({
+				this.showMatch({
 					matchData: this.getDemoMatchData(),
 					timelineData: this.getDemoTimelineData(),
 					region,
@@ -258,7 +258,7 @@ class App {
 		return titles[errorType] || 'Error';
 	}
 
-	async showMatch(data) {
+	showMatch(data) {
 		this.hideAllScreens();
 		const matchScreen = document.getElementById('match-screen');
 
@@ -266,54 +266,41 @@ class App {
 			// Clear previous content
 			matchScreen.innerHTML = '';
 
-			// Show match screen first
-			matchScreen.classList.remove('hidden');
-
 			// Create match view
-			await this.renderMatchView(matchScreen, data);
-		} else {
-			console.error('❌ Match screen element not found!');
-			this.showError('Unable to display match - screen element missing');
+			this.renderMatchView(matchScreen, data);
+
+			matchScreen.classList.remove('hidden');
 		}
 		this.currentView = 'match';
 	}
 
-	async renderMatchView(container, data) {
-		try {
-			// Import components dynamically
-			const [{ MatchHeader }, { TabContainer }] = await Promise.all([import('./components/MatchHeader.js'), import('./components/TabContainer.js')]);
-
-			// Clear container and create sections
-			container.innerHTML = `
-				<div class="match-view">
-					<div class="match-header-section"></div>
-					<div class="match-tabs-section"></div>
-					<div class="back-navigation">
-						<a href="/lol/" class="home-link">← Back to Match Analysis</a>
-						<a href="/" class="main-site-link">← Back to Main Site</a>
+	renderMatchView(container, data) {
+		// Import components dynamically
+		import('./components/MatchHeader.js').then(({ MatchHeader }) => {
+			import('./components/TabContainer.js').then(({ TabContainer }) => {
+				// Clear container and create sections
+				container.innerHTML = `
+					<div class="match-view">
+						<div class="match-header-section"></div>
+						<div class="match-tabs-section"></div>
+						<div class="back-navigation">
+							<a href="/lol/" class="home-link">← Back to Match Analysis</a>
+							<a href="/" class="main-site-link">← Back to Main Site</a>
+						</div>
 					</div>
-				</div>
-			`;
+				`;
 
-			// Initialize components
-			const headerSection = container.querySelector('.match-header-section');
-			const tabsSection = container.querySelector('.match-tabs-section');
+				// Initialize components
+				const headerSection = container.querySelector('.match-header-section');
+				const tabsSection = container.querySelector('.match-tabs-section');
 
-			// Create match header
-			new MatchHeader(headerSection, data.matchData);
+				// Create match header
+				new MatchHeader(headerSection, data.matchData);
 
-			// Create tabbed interface
-			await this.createMatchTabs(tabsSection, data);
-		} catch (error) {
-			console.error('❌ Error rendering match view:', error);
-			container.innerHTML = `
-				<div class="error-message">
-					<h3>Error Loading Match</h3>
-					<p>Failed to load match components: ${error.message}</p>
-					<button onclick="window.location.reload()" class="retry-button">Retry</button>
-				</div>
-			`;
-		}
+				// Create tabbed interface
+				this.createMatchTabs(tabsSection, data);
+			});
+		});
 	}
 
 	async createMatchTabs(container, data) {

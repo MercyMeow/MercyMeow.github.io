@@ -479,42 +479,6 @@
 .chart-wrapper {
 	position: relative;
 	height: 400px;
-	background: rgba(0, 0, 0, 0.2);
-	border-radius: 8px;
-	padding: 1rem;
-}
-
-/* Interactive Charts Grid */
-.interactive-charts {
-	margin: 3rem 0;
-}
-
-.interactive-charts h3 {
-	color: var(--lol-accent-color);
-	text-align: center;
-	margin-bottom: 2rem;
-	font-size: 1.5rem;
-}
-
-.charts-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-	gap: 2rem;
-	margin: 2rem 0;
-}
-
-.charts-grid .chart-container h4 {
-	color: var(--lol-accent-color);
-	text-align: center;
-	margin-bottom: 1rem;
-	font-size: 1.2rem;
-}
-
-.no-data {
-	text-align: center;
-	color: rgba(255, 255, 255, 0.7);
-	font-style: italic;
-	padding: 2rem;
 }
 
 /* Timeline Events */
@@ -524,77 +488,37 @@
 	padding: 1rem;
 }
 
-.timeline-item {
+.timeline-event {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	gap: 1rem;
 	padding: 1rem;
 	margin: 0.5rem 0;
 	background: rgba(255, 255, 255, 0.05);
 	border-radius: 8px;
 	border-left: 4px solid var(--lol-accent-color);
-	transition: var(--lol-transition);
 }
 
-.timeline-item:hover {
-	background: rgba(255, 255, 255, 0.1);
-	transform: translateX(5px);
-}
-
-.timeline-item.first-blood {
-	border-left-color: #ff6b6b;
-}
-
-.timeline-item.objective {
-	border-left-color: #4ecdc4;
-}
-
-.timeline-item.structure {
-	border-left-color: #45b7d1;
-}
-
-.timeline-item.team-fight {
-	border-left-color: #f39c12;
-}
-
-.timeline-item.victory {
-	border-left-color: #2ecc71;
-}
-
-.timeline-time {
+.event-time {
 	font-weight: bold;
 	color: var(--lol-accent-color);
 	min-width: 60px;
-	font-family: monospace;
-	font-size: 0.9rem;
-}
-
-.timeline-event {
-	flex: 1;
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	font-weight: bold;
-	color: var(--lol-text-primary);
 }
 
 .event-icon {
-	font-size: 1.2rem;
-	width: 24px;
-	text-align: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 4px;
 }
 
-.timeline-description {
-	flex: 2;
-	opacity: 0.9;
+.event-description {
+	flex: 1;
+}
+
+.event-participants {
 	font-size: 0.9rem;
-}
-
-.timeline-participants {
-	font-size: 0.8rem;
-	opacity: 0.7;
+	opacity: 0.8;
 	margin-top: 0.25rem;
-	font-style: italic;
 }
 
 /* Build Progression */
