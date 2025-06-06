@@ -68,8 +68,8 @@ class App {
 			}
 		} else if (routeParams.type === 'invalid') {
 			// Handle invalid routes
-			if (path.startsWith('/lol/') || path.startsWith('/match/')) {
-				this.showError('Invalid URL format. Expected formats: /lol/REGIONMATCHID or /match/REGION_MATCHID');
+			if (path.startsWith('/lol/')) {
+				this.showError('Invalid URL format. Expected formats: /lol/REGIONMATCHID or /lol/match/REGION_MATCHID');
 			} else {
 				// Not a recognized route, redirect to /lol/
 				window.location.href = '/lol/';
