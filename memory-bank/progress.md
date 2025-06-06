@@ -8,7 +8,7 @@
 - ✅ File organization defined
 - ✅ Complete League of Legends match analysis application
 - ✅ API key management system with configuration file
-- ✅ Dynamic match routing with `/lol/match/[matchid]` support
+- ✅ Dynamic match routing with `/match/[matchid]` support
 - ✅ Fixed demo match functionality
 - ✅ Enhanced error handling and user feedback
 - ✅ Comprehensive testing suite
@@ -56,7 +56,7 @@
 ### Recent Enhancements (Latest Session)
 
 - ✅ API key management system with config.js
-- ✅ Dynamic `/lol/match/[matchid]` routing support
+- ✅ Dynamic `/match/[matchid]` routing support
 - ✅ Fixed demo match URL format issue
 - ✅ Enhanced error handling and user feedback
 - ✅ Comprehensive test suite implementation
@@ -71,7 +71,7 @@
 
 - Fixed broken demo match functionality
 - Implemented secure API key management system
-- Added dynamic `/lol/match/[matchid]` routing support
+- Added dynamic `/match/[matchid]` routing support
 - Enhanced error handling and user feedback
 - Created comprehensive testing suite
 

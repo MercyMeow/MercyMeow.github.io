@@ -15,15 +15,10 @@
 			const search = window.location.search;
 			const hash = window.location.hash;
 
-			// Check if it's a /lol/ route or /match/ route (redirect /match/ to /lol/match/)
+			// Check if it's a /lol/ route
 			if (path.startsWith('/lol/')) {
 				// Redirect to LoL app with the original path
 				const redirectUrl = '/lol/' + '?redirect=' + encodeURIComponent(path + search + hash);
-				window.location.replace(redirectUrl);
-			} else if (path.startsWith('/match/')) {
-				// Redirect /match/ routes to /lol/match/ format
-				const newPath = path.replace('/match/', '/lol/match/');
-				const redirectUrl = '/lol/' + '?redirect=' + encodeURIComponent(newPath + search + hash);
 				window.location.replace(redirectUrl);
 			} else {
 				// Redirect to main index.html with the original path
