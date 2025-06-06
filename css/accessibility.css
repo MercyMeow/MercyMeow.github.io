@@ -1,0 +1,451 @@
+/* Accessibility Enhancements */
+
+/* Screen Reader Only Content */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.sr-only-focusable:focus {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: inherit !important;
+    margin: inherit !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+}
+
+/* Skip Links */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--accent-color);
+    color: var(--secondary-bg);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    z-index: var(--z-tooltip);
+    font-weight: bold;
+    transition: var(--transition-fast);
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Enhanced Focus Indicators */
+*:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Remove outline for mouse users, keep for keyboard users */
+.js-focus-visible *:focus:not(.focus-visible) {
+    outline: none;
+}
+
+.focus-visible {
+    outline: 2px solid var(--accent-color) !important;
+    outline-offset: 2px !important;
+}
+
+/* High Contrast Focus */
+@media (prefers-contrast: high) {
+    *:focus,
+    .focus-visible {
+        outline: 3px solid #ffff00 !important;
+        outline-offset: 2px !important;
+    }
+}
+
+/* Enhanced Button Focus */
+.btn:focus,
+.tab-button:focus,
+.search-button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(199, 164, 93, 0.3);
+}
+
+/* Enhanced Input Focus */
+.match-input:focus,
+.region-select:focus,
+.api-key-input:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(199, 164, 93, 0.2);
+}
+
+/* Enhanced Link Focus */
+a:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    text-decoration: underline;
+}
+
+/* Keyboard Navigation Indicators */
+.keyboard-nav .tab-button:focus {
+    background: rgba(199, 164, 93, 0.2);
+}
+
+.keyboard-nav .player-card:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(199, 164, 93, 0.3);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .loading-spinner,
+    .spinner,
+    .pulse-circle,
+    .league-spinner,
+    .dots-container .dot,
+    .bars-container .bar {
+        animation: none !important;
+    }
+
+    /* Provide alternative loading indicator */
+    .loading-spinner::after {
+        content: "Loading...";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--accent-color);
+        font-weight: bold;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-bg: #000000;
+        --secondary-bg: #000000;
+        --accent-color: #ffff00;
+        --text-primary: #ffffff;
+        --text-secondary: #ffff00;
+        --border-color: #ffffff;
+        --error-color: #ff0000;
+        --success-color: #00ff00;
+        --warning-color: #ffff00;
+        --team-blue: #0080ff;
+        --team-red: #ff4040;
+    }
+
+    .card,
+    .player-card,
+    .team-card,
+    .tab-container,
+    .match-header,
+    .search-container {
+        border-width: 2px !important;
+        border-style: solid !important;
+    }
+
+    .btn,
+    .tab-button {
+        border-width: 2px !important;
+        font-weight: bold !important;
+    }
+
+    /* Ensure sufficient contrast for text */
+    .text-secondary,
+    .text-muted {
+        color: #ffffff !important;
+    }
+
+    /* High contrast backgrounds */
+    .surface-primary,
+    .surface-secondary,
+    .surface-tertiary {
+        background: #000000 !important;
+        border: 1px solid #ffffff !important;
+    }
+}
+
+/* Color Blind Friendly Enhancements */
+.colorblind-friendly {
+    /* Use patterns and shapes in addition to colors */
+}
+
+.team-blue-pattern {
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(74, 144, 226, 0.1) 2px,
+        rgba(74, 144, 226, 0.1) 4px
+    );
+}
+
+.team-red-pattern {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 2px,
+        rgba(231, 76, 60, 0.1) 2px,
+        rgba(231, 76, 60, 0.1) 4px
+    );
+}
+
+/* Victory/Defeat indicators with symbols */
+.victory::before {
+    content: "✓ ";
+    font-weight: bold;
+}
+
+.defeat::before {
+    content: "✗ ";
+    font-weight: bold;
+}
+
+/* Enhanced Error States */
+.error-state {
+    border: 2px solid var(--error-color) !important;
+    background: var(--error-bg) !important;
+}
+
+.error-state:focus {
+    outline: 2px solid var(--error-color) !important;
+    outline-offset: 2px !important;
+}
+
+/* Loading State Accessibility */
+.loading-container[aria-live="polite"] {
+    /* Announce loading state changes to screen readers */
+}
+
+.loading-message {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* Form Validation */
+.form-field.invalid input,
+.form-field.invalid select {
+    border-color: var(--error-color) !important;
+    background: var(--error-bg) !important;
+}
+
+.form-field.invalid .field-error {
+    color: var(--error-color);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-xs);
+    display: block;
+}
+
+.form-field.valid input,
+.form-field.valid select {
+    border-color: var(--success-color) !important;
+    background: var(--success-bg) !important;
+}
+
+/* Tooltip Accessibility */
+.tooltip {
+    position: relative;
+}
+
+.tooltip[aria-describedby] {
+    cursor: help;
+}
+
+.tooltip-content {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--secondary-bg);
+    color: var(--text-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+    z-index: var(--z-tooltip);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+}
+
+.tooltip:hover .tooltip-content,
+.tooltip:focus .tooltip-content {
+    opacity: 1;
+}
+
+/* Table Accessibility */
+.stats-table {
+    border-collapse: collapse;
+}
+
+.stats-table th {
+    background: var(--surface-primary);
+    font-weight: bold;
+    text-align: left;
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-subtle);
+}
+
+.stats-table td {
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-subtle);
+}
+
+.stats-table tr:nth-child(even) {
+    background: var(--surface-secondary);
+}
+
+.stats-table tr:hover {
+    background: var(--surface-hover);
+}
+
+/* Mobile Touch Targets */
+@media (max-width: 768px) {
+    .btn,
+    .tab-button,
+    .search-button,
+    .error-action-btn {
+        min-height: 44px; /* Minimum touch target size */
+        min-width: 44px;
+    }
+
+    .champion-icon,
+    .item-icon,
+    .spell-image {
+        min-width: 32px;
+        min-height: 32px;
+    }
+}
+
+/* Print Accessibility */
+@media print {
+    .skip-link,
+    .sr-only {
+        display: none !important;
+    }
+
+    /* Ensure good contrast for printing */
+    * {
+        color: #000000 !important;
+        background: #ffffff !important;
+    }
+
+    .victory {
+        font-weight: bold !important;
+    }
+
+    .defeat {
+        font-style: italic !important;
+    }
+
+    /* Add page break hints */
+    .team-card,
+    .player-card {
+        page-break-inside: avoid;
+    }
+
+    .tab-pane {
+        page-break-before: always;
+    }
+}
+
+/* Voice Control Support */
+.voice-command {
+    /* Elements that should be easily targetable by voice commands */
+    position: relative;
+}
+
+.voice-command::after {
+    content: attr(data-voice-label);
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.voice-mode .voice-command::after {
+    opacity: 1;
+}
+
+/* Keyboard Shortcuts */
+.keyboard-shortcut {
+    font-family: var(--font-family-mono);
+    background: var(--surface-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--border-radius-sm);
+    padding: 0.2em 0.4em;
+    font-size: 0.8em;
+    color: var(--text-secondary);
+}
+
+/* Status Announcements */
+.status-announcement {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Live Region for Dynamic Content */
+.live-region {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Focus Management */
+.focus-trap {
+    /* Container for modal focus trapping */
+}
+
+.focus-trap-active {
+    /* When focus trap is active */
+}
+
+/* Error Recovery */
+.error-recovery {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: var(--error-bg);
+    border: 1px solid var(--error-color);
+    border-radius: var(--border-radius);
+}
+
+.error-recovery h3 {
+    color: var(--error-color);
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.error-recovery ul {
+    margin: 0;
+    padding-left: var(--spacing-xl);
+}
+
+.error-recovery li {
+    margin-bottom: var(--spacing-sm);
+}

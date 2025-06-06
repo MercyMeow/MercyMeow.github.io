@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>League of Legends Match Analysis</title>
+
+		<!-- Redirect script for GitHub Pages SPA routing -->
+		<script>
+			// GitHub Pages SPA redirect script
+			// This script redirects 404 errors to the main index.html with the path as a query parameter
+			// The main app will then handle the routing client-side
+
+			const path = window.location.pathname;
+			const search = window.location.search;
+			const hash = window.location.hash;
+
+			// Check if it's a /lol/ route
+			if (path.startsWith('/lol/')) {
+				// Redirect to LoL app with the original path
+				const redirectUrl = '/lol/' + '?redirect=' + encodeURIComponent(path + search + hash);
+				window.location.replace(redirectUrl);
+			} else {
+				// Redirect to main index.html with the original path
+				const redirectUrl = '/' + '?redirect=' + encodeURIComponent(path + search + hash);
+				window.location.replace(redirectUrl);
+			}
+		</script>
+	</head>
+	<body>
+		<div style="text-align: center; padding: 50px; font-family: Arial, sans-serif">
+			<h1>Redirecting...</h1>
+			<p>If you are not redirected automatically, <a href="/">click here to go to the homepage</a>.</p>
+		</div>
+	</body>
+</html>
