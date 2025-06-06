@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Test - LoL Application</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap" rel="stylesheet" />
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/utilities.css" />
+    <link rel="stylesheet" href="../css/accessibility.css" />
+    <link rel="stylesheet" href="../css/performance.css" />
+    <!-- LoL Application Specific Styles -->
+    <link rel="stylesheet" href="css/lol-styles.css" />
+    <link rel="stylesheet" href="css/lol-components.css" />
+</head>
+<body>
+    <div class="app-container">
+        <div class="hero-section">
+            <h1 class="hero-title">🎨 CSS Test Page</h1>
+            <p class="hero-subtitle">Testing if League of Legends styles are loading correctly</p>
+        </div>
+
+        <div class="main-content">
+            <div class="demo-section">
+                <div class="demo-card">
+                    <h3>🎮 CSS Loading Test</h3>
+                    <p>If you can see this styled correctly with the League of Legends theme (purple/gold colors), then the CSS is working!</p>
+                    <a href="#" class="demo-button">Test Button</a>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Base Styles</h3>
+                    <p>Purple background with gold accents should be visible</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Typography</h3>
+                    <p>Philosopher font should be loaded and applied</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Layout</h3>
+                    <p>Responsive grid layout should be working</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Effects</h3>
+                    <p>Hover effects and transitions should be smooth</p>
+                </div>
+            </div>
+
+            <!-- Test API Key Component Styles -->
+            <div class="api-key-config">
+                <div class="api-key-header">
+                    <h3>🔑 API Key Component Test</h3>
+                    <p>This tests the API key configuration component styling.</p>
+                </div>
+                
+                <div class="api-key-status has-key">
+                    <div class="status-indicator">
+                        <span class="status-icon">✅</span>
+                        <span class="status-text">API Key Configured (Test)</span>
+                    </div>
+                    <div class="key-preview">
+                        Key: RGAPI-test•••••••••••••key
+                        <span class="key-source">(Test configuration key)</span>
+                    </div>
+                </div>
+
+                <div class="api-key-actions">
+                    <button class="api-key-button primary">Test Button</button>
+                    <button class="api-key-button secondary">Secondary Button</button>
+                </div>
+            </div>
+
+            <!-- Test Tab Component -->
+            <div class="tab-container">
+                <div class="tab-nav">
+                    <button class="tab-button active">Overview</button>
+                    <button class="tab-button">Timeline</button>
+                    <button class="tab-button">Builds</button>
+                    <button class="tab-button">Advanced</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-panel active">
+                        <h3>Tab Content Test</h3>
+                        <p>This tests the tab container styling. The active tab should be highlighted in gold.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Loading Spinner -->
+            <div class="loading-spinner-container">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Loading spinner test...</div>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>CSS Test Page - League of Legends Theme</p>
+                <div class="footer-links">
+                    <a href="/lol/">← Back to LoL App</a>
+                    <a href="/">← Back to Main Site</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple test to check if CSS is loaded
+        window.addEventListener('load', function() {
+            const heroTitle = document.querySelector('.hero-title');
+            const computedStyle = window.getComputedStyle(heroTitle);
+            const color = computedStyle.color;
+            const fontFamily = computedStyle.fontFamily;
+            
+            console.log('Hero title color:', color);
+            console.log('Hero title font:', fontFamily);
+            
+            // Check if the League of Legends gold color is applied
+            if (color.includes('199, 164, 93') || color.includes('#c7a45d')) {
+                console.log('✅ CSS is loading correctly - League of Legends theme detected!');
+                document.body.style.border = '5px solid #51cf66';
+                setTimeout(() => {
+                    document.body.style.border = 'none';
+                }, 2000);
+            } else {
+                console.log('❌ CSS may not be loading correctly');
+                console.log('Expected: League of Legends gold (#c7a45d)');
+                console.log('Actual:', color);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -17,7 +17,7 @@ export class Router {
 
 		// Intercept link clicks for client-side navigation
 		document.addEventListener('click', (event) => {
-			if (event.target.matches('a[href^="/lol/"]') || event.target.matches('a[href^="/match/"]')) {
+			if (event.target.matches('a[href^="/lol/"]')) {
 				event.preventDefault();
 				const href = event.target.getAttribute('href');
 				this.navigate(href);
@@ -66,9 +66,9 @@ export class Router {
 			return { type: 'home' };
 		}
 
-		// Handle new /match/[matchid] route format
-		if (path.startsWith('/match/')) {
-			const matchPath = path.replace('/match/', '');
+		// Handle new /lol/match/[matchid] route format
+		if (path.startsWith('/lol/match/')) {
+			const matchPath = path.replace('/lol/match/', '');
 			return this.parseMatchIdFromPath(matchPath);
 		}
 
@@ -112,7 +112,7 @@ export class Router {
 			}
 		}
 
-		return { type: 'invalid', path: `/match/${matchPath}` };
+		return { type: 'invalid', path: `/lol/match/${matchPath}` };
 	}
 
 	// Validate route parameters
@@ -156,7 +156,7 @@ export class Router {
 
 	// Generate URL for match (new format)
 	generateNewMatchUrl(region, matchId) {
-		return `/match/${region}_${matchId}`;
+		return `/lol/match/${region}_${matchId}`;
 	}
 
 	// Generate URL for match (preferred format based on input)

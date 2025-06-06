@@ -1,0 +1,299 @@
+/* League of Legends Application Specific Styles */
+
+/* CSS Custom Properties - League of Legends Theme */
+:root {
+    --lol-primary-bg: linear-gradient(135deg, #1a1c4b 0%, #2a1758 100%);
+    --lol-secondary-bg: #2a1758;
+    --lol-accent-color: #c7a45d;
+    --lol-text-primary: #ffffff;
+    --lol-text-secondary: #c7a45d;
+    --lol-border-color: #c7a45d;
+    --lol-shadow-color: rgba(199, 164, 93, 0.2);
+    --lol-shadow-hover: rgba(199, 164, 93, 0.4);
+    --lol-error-color: #ff6b6b;
+    --lol-success-color: #51cf66;
+    --lol-warning-color: #ffd43b;
+    
+    --lol-font-family: 'Philosopher', sans-serif;
+    --lol-border-radius: 10px;
+    --lol-transition: all 0.3s ease;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--lol-font-family);
+    background: var(--lol-primary-bg);
+    color: var(--lol-text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Skip Links for Accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--lol-accent-color);
+    color: var(--lol-secondary-bg);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Main App Container */
+.app-container {
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Screen Management */
+.screen {
+    min-height: 100vh;
+    position: relative;
+}
+
+.screen.hidden {
+    display: none !important;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    background: linear-gradient(135deg, rgba(26, 28, 75, 0.9) 0%, rgba(42, 23, 88, 0.9) 100%);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    color: var(--lol-accent-color);
+    text-shadow: 0 0 20px rgba(199, 164, 93, 0.5);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--lol-text-primary);
+}
+
+/* Main Content */
+.main-content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Search Container */
+.search-container {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--lol-border-color);
+    border-radius: var(--lol-border-radius);
+    padding: 2rem;
+    box-shadow: 0 0 30px var(--lol-shadow-color);
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+}
+
+/* Demo Section */
+.demo-section {
+    margin: 3rem auto;
+    max-width: 600px;
+}
+
+.demo-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--lol-border-color);
+    border-radius: var(--lol-border-radius);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 0 30px var(--lol-shadow-color);
+    backdrop-filter: blur(10px);
+}
+
+.demo-card h3 {
+    color: var(--lol-accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.demo-card p {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.demo-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    background: var(--lol-accent-color);
+    color: var(--lol-secondary-bg);
+    text-decoration: none;
+    border-radius: var(--lol-border-radius);
+    font-weight: bold;
+    transition: var(--lol-transition);
+    font-family: var(--lol-font-family);
+}
+
+.demo-button:hover {
+    background: #d4b76a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(199, 164, 93, 0.3);
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--lol-border-color);
+    border-radius: var(--lol-border-radius);
+    padding: 2rem;
+    text-align: center;
+    transition: var(--lol-transition);
+    box-shadow: 0 0 20px var(--lol-shadow-color);
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--lol-shadow-hover);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.feature-card h3 {
+    color: var(--lol-accent-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Footer */
+.app-footer {
+    background: rgba(42, 23, 88, 0.8);
+    border-top: 2px solid var(--lol-border-color);
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.footer-content p {
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.footer-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--lol-accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--lol-transition);
+}
+
+.footer-links a:hover {
+    color: #d4b76a;
+    text-shadow: 0 0 10px rgba(199, 164, 93, 0.5);
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-accent {
+    color: var(--lol-accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .search-container,
+    .demo-card {
+        padding: 1.5rem;
+        margin: 0 1rem 2rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 2rem 1rem 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .demo-button {
+        display: block;
+        margin: 0.5rem 0;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+}

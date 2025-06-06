@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Fix Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1c4b; color: #c7a45d; }
+        .test-result { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; }
+        .error { background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; }
+        .info { background: rgba(52, 152, 219, 0.2); border: 1px solid #3498db; }
+        .url-test { margin: 10px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 4px; }
+        a { color: #c7a45d; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Route Fix Validation</h1>
+    
+    <div class="url-test">
+        <h3>Test Links (should work within /lol/ app):</h3>
+        <p><strong>Legacy Format:</strong> <a href="/lol/EUW17417459564">/lol/EUW17417459564</a></p>
+        <p><strong>New Format (Fixed):</strong> <a href="/lol/match/EUW1_7417459564">/lol/match/EUW1_7417459564</a></p>
+        <p><strong>Alternative Format:</strong> <a href="/lol/match/EUW1-7417459564">/lol/match/EUW1-7417459564</a></p>
+    </div>
+
+    <div id="test-results"></div>
+
+    <script type="module">
+        import { Router } from './js/router.js';
+
+        function addResult(container, type, message) {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = message;
+            container.appendChild(div);
+        }
+
+        function testRouteFormats() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<h3>Route Format Test Results:</h3>';
+
+            try {
+                const router = new Router('/lol');
+                
+                const testRoutes = [
+                    '/lol/',
+                    '/lol/EUW17417459564',
+                    '/lol/match/EUW1_7417459564',
+                    '/lol/match/EUW1-7417459564',
+                    '/lol/match/EUW17417459564',
+                    '/match/EUW1_7417459564', // This should fail (old format)
+                    '/invalid/route'
+                ];
+
+                addResult(results, 'info', 'Testing route extraction...');
+
+                testRoutes.forEach(route => {
+                    const params = router.extractParams(route);
+                    const validation = router.validateRoute(params);
+                    const status = validation.valid ? 'success' : 'error';
+                    const message = `${route} → ${params.type} (${validation.valid ? 'valid' : validation.error || 'invalid'})`;
+                    addResult(results, status, message);
+                });
+
+                // Test URL generation
+                addResult(results, 'info', 'Testing URL generation...');
+                const legacyUrl = router.generateMatchUrl('EUW1', '7417459564');
+                const newUrl = router.generateNewMatchUrl('EUW1', '7417459564');
+                const preferredUrl = router.generatePreferredMatchUrl('EUW1', '7417459564');
+                
+                addResult(results, 'success', `✓ Legacy URL: ${legacyUrl}`);
+                addResult(results, 'success', `✓ New URL: ${newUrl}`);
+                addResult(results, 'success', `✓ Preferred URL: ${preferredUrl}`);
+
+                // Verify the fix
+                const fixedRoute = '/lol/match/EUW1_7417459564';
+                const fixedParams = router.extractParams(fixedRoute);
+                const fixedValidation = router.validateRoute(fixedParams);
+                
+                if (fixedValidation.valid && fixedParams.type === 'match') {
+                    addResult(results, 'success', `🎉 FIX VERIFIED: ${fixedRoute} now works correctly!`);
+                    addResult(results, 'success', `   → Region: ${fixedParams.region}, Match ID: ${fixedParams.matchId}`);
+                } else {
+                    addResult(results, 'error', `❌ FIX FAILED: ${fixedRoute} still not working`);
+                }
+
+            } catch (error) {
+                addResult(results, 'error', `✗ Test failed: ${error.message}`);
+            }
+        }
+
+        // Run tests on load
+        testRouteFormats();
+    </script>
+</body>
+</html>

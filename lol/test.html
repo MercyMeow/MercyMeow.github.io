@@ -1,284 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoL Match Analysis - Test Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #1a1c4b;
-            color: #c7a45d;
-        }
-        .test-section {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #c7a45d;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .test-result {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 4px;
-        }
-        .success { background: rgba(46, 204, 113, 0.2); border: 1px solid #2ecc71; }
-        .error { background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; }
-        .info { background: rgba(52, 152, 219, 0.2); border: 1px solid #3498db; }
-        button {
-            background: #c7a45d;
-            color: #1a1c4b;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 5px;
-        }
-        button:hover { background: #d4b76a; }
-        pre { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px; overflow-x: auto; }
-        .url-test { margin: 10px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 4px; }
-    </style>
-</head>
-<body>
-    <h1>🧪 LoL Match Analysis - Test Suite</h1>
-    
-    <div class="test-section">
-        <h2>1. Configuration System Test</h2>
-        <button onclick="testConfig()">Test Configuration</button>
-        <div id="config-results"></div>
-    </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LoL Match Analysis - Test Page</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 20px;
+				background: #1a1c4b;
+				color: #c7a45d;
+			}
+			.test-section {
+				background: rgba(255, 255, 255, 0.1);
+				border: 1px solid #c7a45d;
+				border-radius: 8px;
+				padding: 20px;
+				margin: 20px 0;
+			}
+			.test-result {
+				padding: 10px;
+				margin: 10px 0;
+				border-radius: 4px;
+			}
+			.success {
+				background: rgba(46, 204, 113, 0.2);
+				border: 1px solid #2ecc71;
+			}
+			.error {
+				background: rgba(231, 76, 60, 0.2);
+				border: 1px solid #e74c3c;
+			}
+			.info {
+				background: rgba(52, 152, 219, 0.2);
+				border: 1px solid #3498db;
+			}
+			button {
+				background: #c7a45d;
+				color: #1a1c4b;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 4px;
+				cursor: pointer;
+				margin: 5px;
+			}
+			button:hover {
+				background: #d4b76a;
+			}
+			pre {
+				background: rgba(0, 0, 0, 0.3);
+				padding: 10px;
+				border-radius: 4px;
+				overflow-x: auto;
+			}
+			.url-test {
+				margin: 10px 0;
+				padding: 10px;
+				background: rgba(0, 0, 0, 0.2);
+				border-radius: 4px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>🧪 LoL Match Analysis - Test Suite</h1>
 
-    <div class="test-section">
-        <h2>2. API Key Management Test</h2>
-        <button onclick="testApiKeyManagement()">Test API Key Management</button>
-        <div id="apikey-results"></div>
-    </div>
+		<div class="test-section">
+			<h2>1. Configuration System Test</h2>
+			<button onclick="testConfig()">Test Configuration</button>
+			<div id="config-results"></div>
+		</div>
 
-    <div class="test-section">
-        <h2>3. Router Test</h2>
-        <button onclick="testRouter()">Test Router</button>
-        <div id="router-results"></div>
-    </div>
+		<div class="test-section">
+			<h2>2. API Key Management Test</h2>
+			<button onclick="testApiKeyManagement()">Test API Key Management</button>
+			<div id="apikey-results"></div>
+		</div>
 
-    <div class="test-section">
-        <h2>4. URL Format Test</h2>
-        <button onclick="testUrlFormats()">Test URL Formats</button>
-        <div id="url-results"></div>
-    </div>
+		<div class="test-section">
+			<h2>3. Router Test</h2>
+			<button onclick="testRouter()">Test Router</button>
+			<div id="router-results"></div>
+		</div>
 
-    <div class="test-section">
-        <h2>5. API Service Test</h2>
-        <button onclick="testApiService()">Test API Service</button>
-        <div id="api-results"></div>
-    </div>
+		<div class="test-section">
+			<h2>4. URL Format Test</h2>
+			<button onclick="testUrlFormats()">Test URL Formats</button>
+			<div id="url-results"></div>
+		</div>
 
-    <div class="test-section">
-        <h2>6. Demo Match Test</h2>
-        <div class="url-test">
-            <strong>Legacy Format:</strong> <a href="/lol/EUW17417459564">/lol/EUW17417459564</a>
-        </div>
-        <div class="url-test">
-            <strong>New Format:</strong> <a href="/match/EUW1_7417459564">/match/EUW1_7417459564</a>
-        </div>
-        <div class="url-test">
-            <strong>Alternative Format:</strong> <a href="/match/EUW1-7417459564">/match/EUW1-7417459564</a>
-        </div>
-    </div>
+		<div class="test-section">
+			<h2>5. API Service Test</h2>
+			<button onclick="testApiService()">Test API Service</button>
+			<div id="api-results"></div>
+		</div>
 
-    <script type="module">
-        import { CONFIG, ConfigManager, ENVIRONMENT } from './js/config.js';
-        import { Router } from './js/router.js';
-        import { APIService } from './js/api.js';
-        import { ApiKeyManager } from './js/utils.js';
+		<div class="test-section">
+			<h2>6. Demo Match Test</h2>
+			<div class="url-test"><strong>Legacy Format:</strong> <a href="/lol/EUW17417459564">/lol/EUW17417459564</a></div>
+			<div class="url-test"><strong>New Format:</strong> <a href="/lol/match/EUW1_7417459564">/lol/match/EUW1_7417459564</a></div>
+			<div class="url-test"><strong>Alternative Format:</strong> <a href="/lol/match/EUW1-7417459564">/lol/match/EUW1-7417459564</a></div>
+		</div>
 
-        // Make modules available globally for testing
-        window.CONFIG = CONFIG;
-        window.ConfigManager = ConfigManager;
-        window.ENVIRONMENT = ENVIRONMENT;
-        window.Router = Router;
-        window.APIService = APIService;
-        window.ApiKeyManager = ApiKeyManager;
+		<script type="module">
+			import { CONFIG, ConfigManager, ENVIRONMENT } from './js/config.js';
+			import { Router } from './js/router.js';
+			import { APIService } from './js/api.js';
+			import { ApiKeyManager } from './js/utils.js';
 
-        // Test functions
-        window.testConfig = function() {
-            const results = document.getElementById('config-results');
-            results.innerHTML = '';
+			// Make modules available globally for testing
+			window.CONFIG = CONFIG;
+			window.ConfigManager = ConfigManager;
+			window.ENVIRONMENT = ENVIRONMENT;
+			window.Router = Router;
+			window.APIService = APIService;
+			window.ApiKeyManager = ApiKeyManager;
 
-            try {
-                // Test configuration loading
-                addResult(results, 'info', 'Testing configuration loading...');
-                addResult(results, 'success', `✓ CONFIG loaded: ${Object.keys(CONFIG).length} sections`);
-                addResult(results, 'success', `✓ Default API key: ${CONFIG.DEFAULT_API_KEY}`);
-                addResult(results, 'success', `✓ Valid regions: ${CONFIG.VALID_REGIONS.length} regions`);
-                
-                // Test environment detection
-                addResult(results, 'info', 'Testing environment detection...');
-                addResult(results, 'success', `✓ Is development: ${ENVIRONMENT.isDevelopment()}`);
-                addResult(results, 'success', `✓ Is GitHub Pages: ${ENVIRONMENT.isGitHubPages()}`);
-                addResult(results, 'success', `✓ Should use CORS proxy: ${ENVIRONMENT.shouldUseCorsProxy()}`);
+			// Test functions
+			window.testConfig = function () {
+				const results = document.getElementById('config-results');
+				results.innerHTML = '';
 
-                // Test ConfigManager
-                addResult(results, 'info', 'Testing ConfigManager...');
-                const keySource = ConfigManager.getKeySource();
-                const hasValidKey = ConfigManager.hasValidApiKey();
-                addResult(results, 'success', `✓ Key source: ${keySource}`);
-                addResult(results, 'success', `✓ Has valid key: ${hasValidKey}`);
+				try {
+					// Test configuration loading
+					addResult(results, 'info', 'Testing configuration loading...');
+					addResult(results, 'success', `✓ CONFIG loaded: ${Object.keys(CONFIG).length} sections`);
+					addResult(results, 'success', `✓ Default API key: ${CONFIG.DEFAULT_API_KEY}`);
+					addResult(results, 'success', `✓ Valid regions: ${CONFIG.VALID_REGIONS.length} regions`);
 
-            } catch (error) {
-                addResult(results, 'error', `✗ Configuration test failed: ${error.message}`);
-            }
-        };
+					// Test environment detection
+					addResult(results, 'info', 'Testing environment detection...');
+					addResult(results, 'success', `✓ Is development: ${ENVIRONMENT.isDevelopment()}`);
+					addResult(results, 'success', `✓ Is GitHub Pages: ${ENVIRONMENT.isGitHubPages()}`);
+					addResult(results, 'success', `✓ Should use CORS proxy: ${ENVIRONMENT.shouldUseCorsProxy()}`);
 
-        window.testApiKeyManagement = function() {
-            const results = document.getElementById('apikey-results');
-            results.innerHTML = '';
+					// Test ConfigManager
+					addResult(results, 'info', 'Testing ConfigManager...');
+					const keySource = ConfigManager.getKeySource();
+					const hasValidKey = ConfigManager.hasValidApiKey();
+					addResult(results, 'success', `✓ Key source: ${keySource}`);
+					addResult(results, 'success', `✓ Has valid key: ${hasValidKey}`);
+				} catch (error) {
+					addResult(results, 'error', `✗ Configuration test failed: ${error.message}`);
+				}
+			};
 
-            try {
-                addResult(results, 'info', 'Testing API key management...');
-                
-                // Test key validation
-                const testKey = 'RGAPI-test-key-12345';
-                const isValid = ConfigManager.isValidKeyFormat(testKey);
-                addResult(results, isValid ? 'success' : 'error', `✓ Key format validation: ${isValid}`);
+			window.testApiKeyManagement = function () {
+				const results = document.getElementById('apikey-results');
+				results.innerHTML = '';
 
-                // Test ApiKeyManager wrapper
-                const keySource = ApiKeyManager.getKeySource();
-                addResult(results, 'success', `✓ ApiKeyManager key source: ${keySource}`);
+				try {
+					addResult(results, 'info', 'Testing API key management...');
 
-                // Test key hierarchy
-                const currentKey = ConfigManager.getApiKey();
-                addResult(results, 'success', `✓ Current key: ${currentKey ? 'Available' : 'None'}`);
+					// Test key validation
+					const testKey = 'RGAPI-test-key-12345';
+					const isValid = ConfigManager.isValidKeyFormat(testKey);
+					addResult(results, isValid ? 'success' : 'error', `✓ Key format validation: ${isValid}`);
 
-            } catch (error) {
-                addResult(results, 'error', `✗ API key management test failed: ${error.message}`);
-            }
-        };
+					// Test ApiKeyManager wrapper
+					const keySource = ApiKeyManager.getKeySource();
+					addResult(results, 'success', `✓ ApiKeyManager key source: ${keySource}`);
 
-        window.testRouter = function() {
-            const results = document.getElementById('router-results');
-            results.innerHTML = '';
+					// Test key hierarchy
+					const currentKey = ConfigManager.getApiKey();
+					addResult(results, 'success', `✓ Current key: ${currentKey ? 'Available' : 'None'}`);
+				} catch (error) {
+					addResult(results, 'error', `✗ API key management test failed: ${error.message}`);
+				}
+			};
 
-            try {
-                addResult(results, 'info', 'Testing router functionality...');
-                
-                const router = new Router('/lol');
-                
-                // Test route extraction
-                const testRoutes = [
-                    '/lol/',
-                    '/lol/EUW17417459564',
-                    '/match/EUW1_7417459564',
-                    '/match/EUW1-7417459564',
-                    '/match/NA15678901234',
-                    '/invalid/route'
-                ];
+			window.testRouter = function () {
+				const results = document.getElementById('router-results');
+				results.innerHTML = '';
 
-                testRoutes.forEach(route => {
-                    const params = router.extractParams(route);
-                    const validation = router.validateRoute(params);
-                    const status = validation.valid ? 'success' : 'error';
-                    addResult(results, status, `${route} → ${params.type} (${validation.valid ? 'valid' : validation.error})`);
-                });
+				try {
+					addResult(results, 'info', 'Testing router functionality...');
 
-                // Test URL generation
-                addResult(results, 'info', 'Testing URL generation...');
-                const legacyUrl = router.generateMatchUrl('EUW1', '7417459564');
-                const newUrl = router.generateNewMatchUrl('EUW1', '7417459564');
-                const preferredUrl = router.generatePreferredMatchUrl('EUW1', '7417459564');
-                
-                addResult(results, 'success', `✓ Legacy URL: ${legacyUrl}`);
-                addResult(results, 'success', `✓ New URL: ${newUrl}`);
-                addResult(results, 'success', `✓ Preferred URL: ${preferredUrl}`);
+					const router = new Router('/lol');
 
-            } catch (error) {
-                addResult(results, 'error', `✗ Router test failed: ${error.message}`);
-            }
-        };
+					// Test route extraction
+					const testRoutes = ['/lol/', '/lol/EUW17417459564', '/lol/match/EUW1_7417459564', '/lol/match/EUW1-7417459564', '/lol/match/NA15678901234', '/invalid/route'];
 
-        window.testUrlFormats = function() {
-            const results = document.getElementById('url-results');
-            results.innerHTML = '';
+					testRoutes.forEach((route) => {
+						const params = router.extractParams(route);
+						const validation = router.validateRoute(params);
+						const status = validation.valid ? 'success' : 'error';
+						addResult(results, status, `${route} → ${params.type} (${validation.valid ? 'valid' : validation.error})`);
+					});
 
-            try {
-                addResult(results, 'info', 'Testing URL format parsing...');
-                
-                const router = new Router('/lol');
-                const testInputs = [
-                    'EUW1_7417459564',
-                    'EUW1-7417459564', 
-                    'EUW17417459564',
-                    'NA1_5678901234',
-                    'KR_1234567890',
-                    'invalid_format',
-                    '123456789'
-                ];
+					// Test URL generation
+					addResult(results, 'info', 'Testing URL generation...');
+					const legacyUrl = router.generateMatchUrl('EUW1', '7417459564');
+					const newUrl = router.generateNewMatchUrl('EUW1', '7417459564');
+					const preferredUrl = router.generatePreferredMatchUrl('EUW1', '7417459564');
 
-                testInputs.forEach(input => {
-                    const parsed = router.parseMatchInput(input);
-                    if (parsed) {
-                        addResult(results, 'success', `✓ ${input} → ${parsed.region}_${parsed.matchId}`);
-                    } else {
-                        addResult(results, 'error', `✗ ${input} → Failed to parse`);
-                    }
-                });
+					addResult(results, 'success', `✓ Legacy URL: ${legacyUrl}`);
+					addResult(results, 'success', `✓ New URL: ${newUrl}`);
+					addResult(results, 'success', `✓ Preferred URL: ${preferredUrl}`);
+				} catch (error) {
+					addResult(results, 'error', `✗ Router test failed: ${error.message}`);
+				}
+			};
 
-            } catch (error) {
-                addResult(results, 'error', `✗ URL format test failed: ${error.message}`);
-            }
-        };
+			window.testUrlFormats = function () {
+				const results = document.getElementById('url-results');
+				results.innerHTML = '';
 
-        window.testApiService = function() {
-            const results = document.getElementById('api-results');
-            results.innerHTML = '';
+				try {
+					addResult(results, 'info', 'Testing URL format parsing...');
 
-            try {
-                addResult(results, 'info', 'Testing API service...');
-                
-                const apiService = new APIService();
-                
-                // Test API key status
-                const keyStatus = apiService.getApiKeyStatus();
-                addResult(results, 'success', `✓ API key status: ${keyStatus.message}`);
-                addResult(results, 'success', `✓ Key source: ${keyStatus.keySource}`);
-                
-                // Test cache stats
-                const cacheStats = apiService.getCacheStats();
-                addResult(results, 'success', `✓ Cache entries: ${cacheStats.matchDataEntries} match, ${cacheStats.staticDataEntries} static`);
-                
-                // Test environment detection
-                addResult(results, 'success', `✓ CORS proxy needed: ${apiService.shouldUseCorsProxy()}`);
+					const router = new Router('/lol');
+					const testInputs = ['EUW1_7417459564', 'EUW1-7417459564', 'EUW17417459564', 'NA1_5678901234', 'KR_1234567890', 'invalid_format', '123456789'];
 
-                // Test comprehensive status (async)
-                apiService.getApiStatus().then(status => {
-                    addResult(results, 'info', 'API Status:');
-                    addResult(results, 'success', `<pre>${JSON.stringify(status, null, 2)}</pre>`);
-                }).catch(error => {
-                    addResult(results, 'error', `API status check failed: ${error.message}`);
-                });
+					testInputs.forEach((input) => {
+						const parsed = router.parseMatchInput(input);
+						if (parsed) {
+							addResult(results, 'success', `✓ ${input} → ${parsed.region}_${parsed.matchId}`);
+						} else {
+							addResult(results, 'error', `✗ ${input} → Failed to parse`);
+						}
+					});
+				} catch (error) {
+					addResult(results, 'error', `✗ URL format test failed: ${error.message}`);
+				}
+			};
 
-            } catch (error) {
-                addResult(results, 'error', `✗ API service test failed: ${error.message}`);
-            }
-        };
+			window.testApiService = function () {
+				const results = document.getElementById('api-results');
+				results.innerHTML = '';
 
-        function addResult(container, type, message) {
-            const div = document.createElement('div');
-            div.className = `test-result ${type}`;
-            div.innerHTML = message;
-            container.appendChild(div);
-        }
+				try {
+					addResult(results, 'info', 'Testing API service...');
 
-        // Auto-run basic tests on load
-        setTimeout(() => {
-            testConfig();
-            testApiKeyManagement();
-            testRouter();
-            testUrlFormats();
-            testApiService();
-        }, 100);
-    </script>
-</body>
+					const apiService = new APIService();
+
+					// Test API key status
+					const keyStatus = apiService.getApiKeyStatus();
+					addResult(results, 'success', `✓ API key status: ${keyStatus.message}`);
+					addResult(results, 'success', `✓ Key source: ${keyStatus.keySource}`);
+
+					// Test cache stats
+					const cacheStats = apiService.getCacheStats();
+					addResult(results, 'success', `✓ Cache entries: ${cacheStats.matchDataEntries} match, ${cacheStats.staticDataEntries} static`);
+
+					// Test environment detection
+					addResult(results, 'success', `✓ CORS proxy needed: ${apiService.shouldUseCorsProxy()}`);
+
+					// Test comprehensive status (async)
+					apiService
+						.getApiStatus()
+						.then((status) => {
+							addResult(results, 'info', 'API Status:');
+							addResult(results, 'success', `<pre>${JSON.stringify(status, null, 2)}</pre>`);
+						})
+						.catch((error) => {
+							addResult(results, 'error', `API status check failed: ${error.message}`);
+						});
+				} catch (error) {
+					addResult(results, 'error', `✗ API service test failed: ${error.message}`);
+				}
+			};
+
+			function addResult(container, type, message) {
+				const div = document.createElement('div');
+				div.className = `test-result ${type}`;
+				div.innerHTML = message;
+				container.appendChild(div);
+			}
+
+			// Auto-run basic tests on load
+			setTimeout(() => {
+				testConfig();
+				testApiKeyManagement();
+				testRouter();
+				testUrlFormats();
+				testApiService();
+			}, 100);
+		</script>
+	</body>
 </html>

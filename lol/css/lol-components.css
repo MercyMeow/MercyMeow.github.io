@@ -1,0 +1,672 @@
+/* League of Legends Application Component Styles */
+
+/* API Key Configuration Component */
+.api-key-config {
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	padding: 2rem;
+	margin: 2rem auto;
+	max-width: 600px;
+	box-shadow: 0 0 30px var(--lol-shadow-color);
+	backdrop-filter: blur(10px);
+}
+
+.api-key-header h3 {
+	color: var(--lol-accent-color);
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+}
+
+.api-key-header p {
+	margin-bottom: 1rem;
+	opacity: 0.9;
+}
+
+.config-notice {
+	background: rgba(52, 152, 219, 0.2);
+	border: 1px solid #3498db;
+	border-radius: 6px;
+	padding: 1rem;
+	margin: 1rem 0;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.notice-icon {
+	font-size: 1.2rem;
+}
+
+.api-key-status {
+	margin: 1.5rem 0;
+	padding: 1rem;
+	border-radius: var(--lol-border-radius);
+	border: 2px solid;
+}
+
+.api-key-status.has-key {
+	border-color: var(--lol-success-color);
+	background: rgba(81, 207, 102, 0.1);
+}
+
+.api-key-status.no-key {
+	border-color: var(--lol-error-color);
+	background: rgba(255, 107, 107, 0.1);
+}
+
+.status-indicator {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.status-icon {
+	font-size: 1.2rem;
+}
+
+.key-preview {
+	font-family: monospace;
+	font-size: 0.9rem;
+	opacity: 0.8;
+}
+
+.key-source {
+	font-size: 0.8rem;
+	opacity: 0.7;
+	margin-left: 0.5rem;
+}
+
+.api-key-form {
+	margin: 1.5rem 0;
+}
+
+.api-key-form label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--lol-accent-color);
+	font-weight: bold;
+}
+
+.api-key-input {
+	width: 100%;
+	padding: 0.75rem;
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	background: rgba(255, 255, 255, 0.1);
+	color: var(--lol-text-primary);
+	font-family: monospace;
+	margin-bottom: 1rem;
+	transition: var(--lol-transition);
+}
+
+.api-key-input:focus {
+	outline: none;
+	box-shadow: 0 0 10px var(--lol-shadow-hover);
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.api-key-actions {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.api-key-button {
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: var(--lol-border-radius);
+	cursor: pointer;
+	font-family: var(--lol-font-family);
+	font-weight: bold;
+	transition: var(--lol-transition);
+}
+
+.api-key-button.primary {
+	background: var(--lol-accent-color);
+	color: var(--lol-secondary-bg);
+}
+
+.api-key-button.secondary {
+	background: transparent;
+	color: var(--lol-accent-color);
+	border: 2px solid var(--lol-accent-color);
+}
+
+.api-key-button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(199, 164, 93, 0.3);
+}
+
+.api-key-button.primary:hover {
+	background: #d4b76a;
+}
+
+.api-key-button.secondary:hover {
+	background: rgba(199, 164, 93, 0.1);
+}
+
+/* Search Interface Component */
+.search-interface {
+	width: 100%;
+}
+
+.search-form {
+	margin-bottom: 1.5rem;
+}
+
+.search-input-group {
+	margin-bottom: 1rem;
+}
+
+.search-input-group label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--lol-accent-color);
+	font-weight: bold;
+}
+
+.search-input {
+	width: 100%;
+	padding: 1rem;
+	font-size: 1.1rem;
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	background: rgba(255, 255, 255, 0.1);
+	color: var(--lol-text-primary);
+	transition: var(--lol-transition);
+}
+
+.search-input:focus {
+	outline: none;
+	box-shadow: 0 0 15px var(--lol-shadow-hover);
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.search-input::placeholder {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.search-button {
+	width: 100%;
+	padding: 1rem 2rem;
+	font-size: 1.1rem;
+	font-weight: bold;
+	background: var(--lol-accent-color);
+	color: var(--lol-secondary-bg);
+	border: none;
+	border-radius: var(--lol-border-radius);
+	cursor: pointer;
+	transition: var(--lol-transition);
+	font-family: var(--lol-font-family);
+}
+
+.search-button:hover {
+	background: #d4b76a;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(199, 164, 93, 0.3);
+}
+
+.search-button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none;
+}
+
+/* Loading Spinner Component */
+.loading-spinner-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 3rem;
+}
+
+.loading-spinner {
+	width: 60px;
+	height: 60px;
+	border: 4px solid rgba(199, 164, 93, 0.3);
+	border-top: 4px solid var(--lol-accent-color);
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	margin-bottom: 1rem;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loading-text {
+	color: var(--lol-accent-color);
+	font-size: 1.2rem;
+	text-align: center;
+}
+
+/* Error Message Component */
+.error-message {
+	background: rgba(255, 107, 107, 0.1);
+	border: 2px solid var(--lol-error-color);
+	border-radius: var(--lol-border-radius);
+	padding: 2rem;
+	margin: 2rem 0;
+	text-align: center;
+}
+
+.error-message h3 {
+	color: var(--lol-error-color);
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+}
+
+.error-message p {
+	margin-bottom: 1.5rem;
+	opacity: 0.9;
+}
+
+.error-actions {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+/* Tab Container Component */
+.tab-container {
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	margin: 2rem 0;
+	overflow: hidden;
+	box-shadow: 0 0 30px var(--lol-shadow-color);
+}
+
+.tab-nav {
+	display: flex;
+	background: rgba(42, 23, 88, 0.5);
+	border-bottom: 2px solid var(--lol-border-color);
+}
+
+.tab-button {
+	flex: 1;
+	padding: 1rem;
+	background: transparent;
+	border: none;
+	color: var(--lol-text-primary);
+	cursor: pointer;
+	transition: var(--lol-transition);
+	font-family: var(--lol-font-family);
+	font-weight: bold;
+	border-right: 1px solid var(--lol-border-color);
+}
+
+.tab-button:last-child {
+	border-right: none;
+}
+
+.tab-button:hover {
+	background: rgba(199, 164, 93, 0.1);
+}
+
+.tab-button.active {
+	background: var(--lol-accent-color);
+	color: var(--lol-secondary-bg);
+}
+
+.tab-content {
+	padding: 2rem;
+	min-height: 400px;
+}
+
+.tab-panel {
+	display: none;
+}
+
+.tab-panel.active {
+	display: block;
+}
+
+/* Match Header Component */
+.match-header {
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	padding: 2rem;
+	margin-bottom: 2rem;
+	text-align: center;
+	box-shadow: 0 0 30px var(--lol-shadow-color);
+}
+
+.match-title {
+	color: var(--lol-accent-color);
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.match-info {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+	flex-wrap: wrap;
+	opacity: 0.9;
+}
+
+.match-info-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.match-info-label {
+	font-size: 0.9rem;
+	opacity: 0.7;
+	margin-bottom: 0.25rem;
+}
+
+.match-info-value {
+	font-weight: bold;
+	color: var(--lol-accent-color);
+}
+
+/* Match Analysis Components */
+.team-overview {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+	margin: 2rem 0;
+}
+
+.team-section {
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	padding: 1.5rem;
+}
+
+.team-header {
+	text-align: center;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid var(--lol-border-color);
+}
+
+.team-name {
+	color: var(--lol-accent-color);
+	font-size: 1.3rem;
+	font-weight: bold;
+}
+
+.player-card {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	margin: 0.5rem 0;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 8px;
+	transition: var(--lol-transition);
+}
+
+.player-card:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.champion-icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 2px solid var(--lol-border-color);
+}
+
+.player-info {
+	flex: 1;
+}
+
+.player-name {
+	font-weight: bold;
+	color: var(--lol-text-primary);
+	margin-bottom: 0.25rem;
+}
+
+.champion-name {
+	color: var(--lol-accent-color);
+	font-size: 0.9rem;
+}
+
+.player-stats {
+	display: flex;
+	gap: 1rem;
+	font-size: 0.9rem;
+}
+
+.stat-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.stat-value {
+	font-weight: bold;
+	color: var(--lol-accent-color);
+}
+
+.stat-label {
+	font-size: 0.8rem;
+	opacity: 0.7;
+}
+
+/* Chart Container */
+.chart-container {
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	padding: 2rem;
+	margin: 2rem 0;
+}
+
+.chart-title {
+	color: var(--lol-accent-color);
+	font-size: 1.3rem;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+.chart-wrapper {
+	position: relative;
+	height: 400px;
+}
+
+/* Timeline Events */
+.timeline-events {
+	max-height: 500px;
+	overflow-y: auto;
+	padding: 1rem;
+}
+
+.timeline-event {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	margin: 0.5rem 0;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 8px;
+	border-left: 4px solid var(--lol-accent-color);
+}
+
+.event-time {
+	font-weight: bold;
+	color: var(--lol-accent-color);
+	min-width: 60px;
+}
+
+.event-icon {
+	width: 32px;
+	height: 32px;
+	border-radius: 4px;
+}
+
+.event-description {
+	flex: 1;
+}
+
+.event-participants {
+	font-size: 0.9rem;
+	opacity: 0.8;
+	margin-top: 0.25rem;
+}
+
+/* Build Progression */
+.build-progression {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 2rem;
+}
+
+.player-build {
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	padding: 1.5rem;
+}
+
+.build-header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid var(--lol-border-color);
+}
+
+.items-timeline {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.item-purchase {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.75rem;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 6px;
+}
+
+.item-icon {
+	width: 32px;
+	height: 32px;
+	border-radius: 4px;
+}
+
+.item-info {
+	flex: 1;
+}
+
+.item-name {
+	font-weight: bold;
+	color: var(--lol-text-primary);
+}
+
+.item-time {
+	font-size: 0.9rem;
+	color: var(--lol-accent-color);
+}
+
+/* Advanced Stats */
+.stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2rem;
+	margin: 2rem 0;
+}
+
+.stat-card {
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid var(--lol-border-color);
+	border-radius: var(--lol-border-radius);
+	padding: 1.5rem;
+	text-align: center;
+}
+
+.stat-card-title {
+	color: var(--lol-accent-color);
+	font-size: 1.1rem;
+	margin-bottom: 1rem;
+}
+
+.stat-card-value {
+	font-size: 2rem;
+	font-weight: bold;
+	color: var(--lol-text-primary);
+	margin-bottom: 0.5rem;
+}
+
+.stat-card-subtitle {
+	font-size: 0.9rem;
+	opacity: 0.7;
+}
+
+/* Responsive Design for Components */
+@media (max-width: 768px) {
+	.api-key-actions {
+		flex-direction: column;
+	}
+
+	.api-key-button {
+		width: 100%;
+	}
+
+	.tab-nav {
+		flex-direction: column;
+	}
+
+	.tab-button {
+		border-right: none;
+		border-bottom: 1px solid var(--lol-border-color);
+	}
+
+	.tab-button:last-child {
+		border-bottom: none;
+	}
+
+	.tab-content {
+		padding: 1rem;
+	}
+
+	.match-info {
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.error-actions {
+		flex-direction: column;
+	}
+
+	.team-overview {
+		grid-template-columns: 1fr;
+	}
+
+	.player-stats {
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.build-progression {
+		grid-template-columns: 1fr;
+	}
+
+	.stats-grid {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	}
+
+	.chart-wrapper {
+		height: 300px;
+	}
+}
